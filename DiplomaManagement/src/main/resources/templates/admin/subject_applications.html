@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subject Applications</title>
+    <style>
+        /* CSS styles */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        h1 {
+            color: #333333;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        th {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        .assign-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        
+        .options {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .option-button {
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        
+        .option-label {
+            font-weight: bold;
+        }
+        
+        .assign-random-form {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .input-group label {
+            margin-right: 20px;
+        }
+        
+        .input-group input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            color: #333333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .option-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .option-container .assign-button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Subject Applications</h1>
+    
+    <div class="options">
+        <form class="assign-random-form" th:action="@{/admin/assign_subject/random(subjectId=${subjectId})}" method="post">
+            <button type="submit" class="assign-button">Assign To Random Student</button>
+        </form>
+        <form class="assign-random-form" th:action="@{/admin/assign_subject/best_avg_grade}" method="post">
+            <input type="hidden" name="subjectId" th:value="${subjectId}" />
+            <button type="submit" class="assign-button">Assign to Student with Highest Average</button>
+        </form>
+        <form class="assign-random-form" th:action="@{/admin/assign_subject/fewest_courses}" method="post">
+            <input type="hidden" name="subjectId" th:value="${subjectId}" />
+            <button type="submit" class="assign-button">Assign to Student with Fewest Remaining Courses</button>
+        </form>
+        <form class="assign-random-form" id="fewestCoursesAndGradeForm" th:action="@{/admin/assign_subject/fewest_courses_and_Grade}" method="post">
+            <input type="hidden" name="subjectId" th:value="${subjectId}" />
+            <div class="option-container">
+                <div class="input-group">
+                    <label for="thresholdCourse" class="option-label">Threshold Course:</label>
+                    <input type="number" id="thresholdCourse" name="thresholdCourse" required />
+                </div>
+                <div class="input-group">
+                    <label for="thresholdGrade" class="option-label">Threshold Grade:</label>
+                    <input type="number" id="thresholdGrade" name="thresholdGrade" step="0.01" required />
+                </div>
+                <button type="button" class="assign-button" onclick="submitForm()">Assign to Student with thresholds</button>
+            </div>
+        </form>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Application ID</th>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="app : ${applications}">
+                <td th:text="${app.id}"></td>
+                <td th:text="${app.student.id}"></td>
+                <td th:text="${app.student.name}"></td>
+                <td>
+                    <form th:action="@{/admin/assign_subject(subjectId=${subjectId})}" method="post">
+                        <input type="hidden" name="applicationId" th:value="${app.id}" />
+                        <button type="submit" class="assign-button">Assign Subject</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <a href="/admin/my_subjects" class="back-button">Back to My Subjects</a>
+    
+    <script>
+        function submitForm() {
+            var thresholdCourse = document.getElementById("thresholdCourse").value;
+            var thresholdGrade = document.getElementById("thresholdGrade").value;
+
+            if (!thresholdCourse || !thresholdGrade) {
+                // Display an error message or perform other validation handling
+                return;
+            }
+
+            document.getElementById("fewestCoursesAndGradeForm").submit();
+        }
+    </script>
+</body>
+</html>

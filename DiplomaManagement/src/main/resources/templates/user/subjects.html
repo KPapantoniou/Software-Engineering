@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Available Diploma Thesis Subjects</title>
+    <style>
+        /* CSS styles */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        h1 {
+            color: #333333;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        th {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        .apply-details-cell {
+            display: flex;
+            align-items: center;
+        }
+
+        .apply-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 6px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .apply-btn:hover {
+            background-color: #45a049;
+        }
+
+        .details-btn {
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            padding: 6px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .details-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .back-btn {
+            background-color: #ff0000;
+            border: none;
+            color: white;
+            padding: 6px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 10px;
+        }
+
+        .back-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Diploma Thesis Subjects</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterate over availableSubjects and display them in the table -->
+            <tr th:each="subject : ${availableSubjects}">
+                <td th:text="${subject.name}"></td>
+                <td class="apply-details-cell">
+                    <form method="post" action="/user/apply">
+                        <input type="hidden" name="subjectId" th:value="${subject.id}">
+                        <button type="submit" class="apply-btn">Apply</button>
+                    </form>
+                    <form method="get" action="/user/details">
+                        <input type="hidden" name="subjectId" th:value="${subject.id}">
+                        <button type="submit" class="details-btn">See Details</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="window.location.href='/'" class="back-btn">Back to Homepage</button>
+</body>
+</html>

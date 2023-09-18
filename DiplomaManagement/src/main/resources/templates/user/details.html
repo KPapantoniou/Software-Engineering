@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diploma Thesis Subject Details</title>
+    <style>
+        /* CSS styles */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        h1 {
+            color: #333333;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        th {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        .back-btn {
+            background-color: #FF6F61;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #DB524D;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diploma Thesis Subject Details</h1>
+    <table>
+        <tr>
+            <th>Subject Name</th>
+            <th>Objectives</th>
+            <th>Professor</th>
+        </tr>
+        <tr>
+            <td th:text="${subject.name}"></td>
+            <td th:text="${subject.objectives}"></td>
+            <td th:text="${subject.professor.fullname}"></td>
+        </tr>
+    </table>
+    <button onclick="location.href='/user/subjects'" class="back-btn">Back to Available Diploma Thesis Subjects</button>
+</body>
+</html>

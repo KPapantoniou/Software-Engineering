@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <style>
+        /* CSS styles */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        h1 {
+            color: #333333;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .back-button {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Error</h1>
+    <p class="error-message" th:text="${errorMessage}"></p>
+    <a class="back-button" href="/admin/dashboard">Go Back to Dashboard</a>
+</body>
+</html>

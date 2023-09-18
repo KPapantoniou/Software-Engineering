@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subject Applications</title>
+    <style>
+        /* CSS styles */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        h1 {
+            color: #333333;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        th {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        .thesis-button {
+            padding: 5px 15px;
+            font-size: 15px;
+            background-color: #333333;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .thesis-button:hover {
+            background-color: #555555;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #333333;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .back-button:hover {
+            background-color: #555555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assigned Thesis Projects</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Thesis Project Title</th>
+                <th>Student Name</th>
+                <th>Student ID</th>
+                <th>Set Grade</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="thesis : ${assignedThesisProjects}">
+                <td th:text="${thesis.subject.title}"></td>
+                <td th:text="${thesis.student.name}"></td>
+                <td th:text="${thesis.student.id}"></td>
+                <td>
+                    <form th:action="@{/admin/set_grade/{thesisId}(thesisId=${thesis.id})}" method="GET">
+                        <button type="submit" class="thesis-button">Set Grade</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <a href="/admin/dashboard" class="back-button">Back to Dashboard</a>
+</body>
+</html>

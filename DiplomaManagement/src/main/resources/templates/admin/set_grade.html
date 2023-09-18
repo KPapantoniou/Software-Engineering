@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thesis Grade</title>
+    <style>
+        /* CSS styles */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        h1 {
+            color: #333333;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        th {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            margin-right: 20px;
+        }
+
+        .input-group input[type="number"] {
+            width: 80px;
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        button[type="submit"] {
+            background-color: #333333;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #555555;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            color: #333333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Thesis Grade</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Set Implementation Grade</th>
+                <th>Set Report Grade</th>
+                <th>Set Presentation Grade</th>
+                <th>Calculate Total Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <form class="input-group" th:action="@{/admin/set_grade/set_implementation_grade}" method="post">
+                        <input type="hidden" name="thesisId" th:value="${thesisId}" />
+                        <label for="implementationgrade">Implementation Grade:</label>
+                        <input type="number" id="implementationgrade" name="implementationgrade" step="0.01" required/>
+                        <button type="submit">Set</button>
+                    </form>
+                </td>
+                <td>
+                    <form class="input-group" th:action="@{/admin/set_grade/set_report_grade}" method="post">
+                        <input type="hidden" name="thesisId" th:value="${thesisId}" />
+                        <label for="reportgrade">Report Grade:</label>
+                        <input type="number" id="reportgrade" name="reportgrade" step="0.01" required/>
+                        <button type="submit">Set</button>
+                    </form>
+                </td>
+                <td>
+                    <form class="input-group" th:action="@{/admin/set_grade/set_presentation_grade}" method="post">
+                        <input type="hidden" name="thesisId" th:value="${thesisId}" />
+                        <label for="presentationgrade">Presentation Grade:</label>
+                        <input type="number" id="presentationgrade" name="presentationgrade" step="0.01" required/>
+                        <button type="submit">Set</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/admin/calculate_total_grade}" method="get">
+                        <input type="hidden" name="thesisId" th:value="${thesisId}" />
+                        <button type="submit">Calculate Total Grade</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>Implementation Grade</th>
+                <th>Report Grade</th>
+                <th>Presentation Grade</th>
+                <th>Overall Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span th:text="${implementationGrade}"></span></td>
+                <td><span th:text="${reportGrade}"></span></td>
+                <td><span th:text="${presentationGrade}"></span></td>
+                <td><span th:text="${overallGrade}"></span></td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Success Message -->
+    <div th:if="${successMessage}" class="success-message">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <!-- Back Button -->
+    <a href="/admin/thesis_project" class="back-button">Back to My Thesis</a>
+</body>
+</html>

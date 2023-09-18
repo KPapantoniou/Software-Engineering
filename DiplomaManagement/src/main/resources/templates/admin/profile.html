@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <style>
+        /* CSS styles */
+
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        h1 {
+            color: #333333;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        form {
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            border: 2px solid #dddddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            padding: 10px;
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        input[type="submit"] {
+            background-color: #333333;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            padding: 10px 20px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #555555;
+        }
+
+        .back-button {
+            background-color: #ff0000;
+            border: none;
+            color: white;
+            padding: 6px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Professor Information</h1>
+    <form th:object="${professor}" method="POST" action="/admin/save">
+        <input type="hidden" th:field="*{id}" />
+        <label for="fullname">Full Name:</label>
+        <input type="text" id="fullname" name="fullname" th:field="*{fullname}" required><br><br>
+        <label for="speciality">Speciality:</label>
+        <input type="text" id="speciality" name="speciality" th:field="*{speciality}" required><br><br>
+        <input type="submit" value="Save">
+    </form>
+    <a href="/admin/dashboard" class="back-button">Back to Dashboard</a>
+</body>
+</html>

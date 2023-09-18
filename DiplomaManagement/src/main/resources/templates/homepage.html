@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Homepage</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <h2>Welcome to Homepage</h2>
+
+        <hr>
+
+        <div sec:authorize="hasRole('ROLE_ANONYMOUS')">
+            <p>
+                <a th:href="@{/login}" class="btn btn-primary btn-sm mb-3" th:text="Login"></a>
+                <a th:href="@{/register}" class="btn btn-primary btn-sm mb-3" th:text="Register"></a>
+            </p>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            <h4>Logged as: <span sec:authentication="name"></span></h4>
+            <h4>Has role: <span sec:authentication="authorities"></span></h4>
+
+            <hr>
+
+            <p sec:authorize="hasAuthority('STUDENT')">
+                <a th:href="@{/user/dashboard}" class="btn btn-primary btn-sm mr-2">User Dashboard</a>
+                <a th:href="@{/logout}" class="btn btn-danger btn-sm">Logout</a>
+                <a th:href="@{/user/profile}" class="btn btn-primary btn-sm mr-2"> Profile Info</a>
+            </p>
+
+            <p sec:authorize="hasAuthority('PROFESSOR')">
+                <a th:href="@{/admin/dashboard}" class="btn btn-primary btn-sm mr-2">Admin Dashboard</a>
+                <a th:href="@{/logout}" class="btn btn-danger btn-sm">Logout</a>
+                <a th:href="@{/admin/profile}" class="btn btn-primary btn-sm mr-2"> Profile Info</a>
+            </p>
+
+            <div class="container text-center">
+                <h2>Options</h2>
+                <hr> <!-- Added horizontal line -->
+                <br>
+                <div class="row justify-content-center">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <!-- Student Options -->
+                                <div sec:authorize="hasAuthority('STUDENT')">
+                                    <a th:href="@{/user/subjects}" class="btn btn-primary btn-block mt-3">Available Diploma Thesis Subjects</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <!-- Professor Options -->
+                                <div sec:authorize="hasAuthority('PROFESSOR')">
+                                    <a th:href="@{/admin/my_subjects}" class="btn btn-primary btn-block">My Diploma Thesis Subjects</a>
+                                </div>
+                                <div sec:authorize="hasAuthority('PROFESSOR')">
+                                    <a th:href="@{/admin/thesis_project}" class="btn btn-primary btn-block mt-3">My Diploma Thesis Projects</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
