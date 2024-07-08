@@ -36,7 +36,7 @@ This application manages diploma projects for students and professors, allowing 
 2. **Database Setup**:
 
 - Create a MySQL database named diploma_project_db.
-- Import the database schema using the provided SQL script (database-schema.sql) located in the docs/ directory.
+- Import the database schema using the provided SQL script (schema.sql) 
 3. **Configure Database Connection**:
 
 - Open src/main/resources/application.properties.
