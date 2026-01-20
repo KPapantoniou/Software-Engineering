@@ -42,9 +42,9 @@ This application manages diploma projects for students and professors, allowing 
 - Open src/main/resources/application.properties.
 - Modify the database configuration
   ```
-spring.datasource.url=jdbc:mysql://localhost:3306/diploma_project_db
-spring.datasource.username=root
-spring.datasource.password=password
+   spring.datasource.url=jdbc:mysql://localhost:3306/diploma_project_db
+   spring.datasource.username=root
+   spring.datasource.password=password
 
 4. **Run the Application**:
 
