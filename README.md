@@ -5,17 +5,6 @@
 - **Konstantis Papantoniou** (ID: 4769)
 - **Vasileios Somakos** (ID: 4806)
 
-## Versions History
-
-| Date       | Version | Description                          | Authors    |
-|------------|---------|--------------------------------------|------------|
-| 2023/03/08 | <1.0>   | Project discussion                    | 4769, 4806 |
-| 2023/03/21 | <2.0>   | Initial class design                  | 4769, 4806 |
-| 2023/04/10 | <3.0>   | Detailed class design                 | 4769, 4806 |
-| 2023/04/20 | <4.0>   | Extensive class design                | 4769, 4806 |
-| 2023/04/27 | <5.0>   | Analysis and requirements discussion  | 4769, 4806 |
-| 2023/05/10 | <6.0>   | Final Report                          | 4769, 4806 |
-
 ## Overview
 
 This application manages diploma projects for students and professors, allowing them to handle project assignments, applications, and grading.
